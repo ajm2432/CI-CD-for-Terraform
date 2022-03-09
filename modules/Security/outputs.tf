@@ -14,7 +14,3 @@ output "tf_pipeline_iam_role" {
   value = aws_iam_role.example-tf-Pipeline.arn
 }
 
-output "key_pair_name" {
-  value = aws_key_pair.deployer.id
-}
-

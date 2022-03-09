@@ -26,7 +26,7 @@ module "security" {
  module "s3" {
    source                    = "./modules/S3"
    log_bucket_name           = "prod-vpc--logs"
-   pipeline_bucket_name      = "production-tf-pipeline-artifacts-"
+   pipeline_bucket_name      = "production-tf-pipeline-artifacts-${var.region}"
    kms_key                   = "${module.security.aws_kms_key}"
  } 
  ################################################################################
@@ -35,8 +35,8 @@ module "security" {
 module "pipelines" {
   source                         = "./modules/CodePipelines"
   connection_name                = "prod-example-tf"
-  full_repo_name                 = "ajm2432/AutoRobots-tf"
-  git_hub_url                    = "https://github.com/ajm2432/Autorobots-tf.git"
+  full_repo_name                 = "ajm2432/TerraformTest"
+  git_hub_url                    = "https://github.com/ajm2432/TerraformTest.git"
   pipeline_name                  = "prod-example-tf-pipeline" 
   region                         = "${var.region}"
   codebuild-Security-Check-role  = "${module.security.security_check_iam_role}"

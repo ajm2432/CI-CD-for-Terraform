@@ -1,10 +1,4 @@
-###################################################
-#ec2 Key-pair
-###################################################
-resource "aws_key_pair" "deployer" {
-  key_name   = "test-keys"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCq9QcPKvSu+A0fSsiZbKPY3THELPCDPTRRsCPoSZGb7II32n+f94t9Per0xl47hq+fiwiV0wmC9dZdtgipFCvHt2dDRcEFkHwln3mGaqlh8EkI6RO5wVZDIfvFI1dAAT/C8LBjiUkAAGhSG1wnbjuI6M1PiBHg51uLEfV+siGLZV9ZCasMZwSWeU+w2b8x/HfNWIrQsTM5hUo2Pmj+ONdrC8kCtdbLGobPGh/O+nKfBlAYu/o2+NR1QdFoGCz7eECm1jFixiUd7mnJDl3jrTF9YQYoqEsw//kBc2eau3WXpDGSf+XPvjolvy3wSwrt5MbG+RY9ntQs04sEJrxvN3Vf root@SEA-1801004923"
-}
+
 ###################################################
 #KMS Key
 ###################################################
@@ -30,7 +24,7 @@ resource "aws_kms_key" "exampleKey" {
             "Sid": "Allow access for Key Administrators",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Admin"
+                "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Admin2"
             },
             "Action": [
                 "kms:Create*",

@@ -61,7 +61,7 @@ resource "aws_codebuild_project" "Security_Check" {
                 - pip3 install checkov
               build:
                 commands:
-                   - checkov --directory . --skip-check CKV_AWS_144,CKV_AWS_31,CKV_AWS_18,CKV_AWS_5,CKV2_AWS_31,CKV2_AWS_5,CKV_AWS_91
+                   - checkov --directory . 
             
                    
               post_build:
