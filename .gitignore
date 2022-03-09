@@ -1,0 +1,9 @@
+.terraform
+.vscode
+*.tfstate
+*.tfstate.backup
+*terraform.tfstate*
+*.out
+.bundle
+.terraform.lock.hcl
+

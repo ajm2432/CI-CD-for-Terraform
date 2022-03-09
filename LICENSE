@@ -1,0 +1,9 @@
+This sample, non-production-ready template Creates a 3 tiered application infrastructure that is Highly available, a CI/CD pipeline for deploying terraform, and Ec2 image builder to create AMIs with recipe to deploy ansible playbooks. 
+and an Elastic Load Balancer. 
+
+© 2021 Amazon Web Services, Inc. or its affiliates. All Rights Reserved. 
+
+This AWS Content is provided subject to the terms of the 
+AWS Customer Agreement available at http://aws.amazon.com/agreement or other written agreement between Customer and 
+either Amazon Web Services, Inc. or Amazon Web Services EMEA SARL or both.
+
