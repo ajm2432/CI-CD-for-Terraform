@@ -52,6 +52,15 @@
 
 
 <!-- GETTING STARTED -->
+### Resources created 
+
+1. CodePipeline role, policy and policy attachment
+2. Role, policy and policy attachment for each CodeBuild stage
+3. KMS key
+4. S3 Bucket for logging/Block public access
+5. S3 Bucket for pipeline artifacts/Block public access
+6. CodeBuild stage for terraform plan
+7. CodeBuild stage for security check using checkov
 
 ### Getting started
 
