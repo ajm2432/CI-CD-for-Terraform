@@ -1,12 +1,11 @@
 data "aws_caller_identity" "current" {}
-locals {
-  elb-id = "127311923021"
-}
 ###################################################
-#VPC Log Bucket Creation
+#Log Bucket Creation
 ###################################################
 resource "aws_s3_bucket" "log_bucket" {
   bucket = var.log_bucket_name
+  #checkov:skip=CKV_AWS_144:Cross replication not needed for this
+  #checkov:skip=CKV_AWS_18:Cannot log a logging bucket... infinate loop
   force_destroy = true
   versioning {
   enabled = true
@@ -33,7 +32,7 @@ resource "aws_s3_bucket_object" "pipeline-log" {
 
 }
 ###################################################
-#VPC Log Bucket block public access
+#Log Bucket block public access
 ###################################################
 resource "aws_s3_bucket_public_access_block" "logbucketeaccess" {
   bucket = aws_s3_bucket.log_bucket.id
@@ -42,50 +41,6 @@ resource "aws_s3_bucket_public_access_block" "logbucketeaccess" {
   ignore_public_acls = true
   restrict_public_buckets = true
 }
-###################################################
-#VPC Log Bucket policy
-###################################################
-resource "aws_s3_bucket_policy" "allow_access_for_vpc_logs" {
-  bucket = aws_s3_bucket.log_bucket.id
-  policy = jsonencode(
-{
-    "Version": "2012-10-17",
-    "Id": "AWSLogDeliveryWrite20150319",
-    "Statement": [
-        {
-            "Sid": "AWSLogDeliveryWrite",
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "delivery.logs.amazonaws.com"
-            },
-            "Action": "s3:PutObject",
-            "Resource": "${aws_s3_bucket.log_bucket.arn}/*",
-            "Condition": {
-                "StringEquals": {
-                    "aws:SourceAccount": "540204466076",
-                    "s3:x-amz-acl": "bucket-owner-full-control"
-                },
-            }
-        },
-        {
-            "Sid": "AWSLogDeliveryAclCheck",
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "delivery.logs.amazonaws.com"
-            },
-            "Action": "s3:GetBucketAcl",
-            "Resource": "${aws_s3_bucket.log_bucket.arn}",
-            "Condition": {
-                "StringEquals": {
-                    "aws:SourceAccount": "540204466076"
-                },
-            }
-        }
-    ]
-}
-  )
-}
-
 ###################################################
 #CodePipeline Bucket Creation
 ###################################################
@@ -109,7 +64,6 @@ server_side_encryption_configuration {
    }
 }
    }
-
 ###################################################
 #CodePipeline Bucket block public access
 ###################################################

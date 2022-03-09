@@ -25,7 +25,7 @@ module "security" {
  ################################################################################
  module "s3" {
    source                    = "./modules/S3"
-   log_bucket_name           = "prod-vpc--logs"
+   log_bucket_name           = "prod-${var.region}-logs"
    pipeline_bucket_name      = "production-tf-pipeline-artifacts-${var.region}"
    kms_key                   = "${module.security.aws_kms_key}"
  } 
@@ -44,4 +44,5 @@ module "pipelines" {
   codebuild-TerraformCommit-role = "${module.security.tf_apply_iam_role}"
   example-tf-Pipeline-role       = "${module.security.tf_pipeline_iam_role}"
   artifact_location              = "${module.s3.aws_pipeline_bucket}"
+  kms_key                        = "${module.security.aws_kms_key}"
 }

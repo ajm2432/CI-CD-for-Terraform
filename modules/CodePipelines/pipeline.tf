@@ -17,7 +17,12 @@ resource "aws_codepipeline" "example-tf-pipeline" {
   artifact_store {
     location = var.artifact_location
     type     = "S3"
+  encryption_key {
+      id   = "${var.kms_key}"
+      type = "KMS"
+    }
   }
+  
 
   stage {
     name = "Source"

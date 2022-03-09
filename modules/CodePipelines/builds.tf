@@ -36,7 +36,7 @@ resource "aws_codebuild_project" "Security_Check" {
 
   logs_config {
      cloudwatch_logs {
-      status = "DISABLED"
+      status = "ENABLED"
     } 
 
     s3_logs {
@@ -109,7 +109,7 @@ resource "aws_codebuild_project" "TerraformPlan" {
 
   logs_config {
      cloudwatch_logs {
-      status = "DISABLED"
+      status = "ENABLED"
     } 
 
     s3_logs {
@@ -194,7 +194,7 @@ resource "aws_codebuild_project" "TerraformApply2" {
 
   logs_config {
      cloudwatch_logs {
-      status = "DISABLED"
+      status = "ENABLED"
     } 
 
     s3_logs {

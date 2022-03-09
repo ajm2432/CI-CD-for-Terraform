@@ -54,3 +54,8 @@ variable "git_hub_url" {
   type        = string
   default     = ""
 }
+variable "kms_key" {
+  description = "kms key"
+  type        = string
+  default     = ""
+}
