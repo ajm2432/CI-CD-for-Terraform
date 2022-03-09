@@ -46,6 +46,7 @@ resource "aws_s3_bucket_public_access_block" "logbucketeaccess" {
 ###################################################
 resource "aws_s3_bucket" "pipelinebucket" {
   bucket = var.pipeline_bucket_name
+  #checkov:skip=CKV_AWS_144:Cross replication not needed for this
   acl    = "private"
   force_destroy = true
 versioning {

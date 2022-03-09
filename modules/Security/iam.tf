@@ -198,6 +198,13 @@ resource "aws_iam_policy" "CodeBuildBasePolicy-Security_Check" {
             "${aws_codebuild_report_group.sec_check.arn}",
           ]
         },
+        {
+            "Action": [
+                "logs:*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
       ]
       Version = "2012-10-17"
     }
