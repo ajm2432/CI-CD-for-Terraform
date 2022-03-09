@@ -61,6 +61,7 @@
 5. S3 Bucket for pipeline artifacts/Block public access
 6. CodeBuild stage for terraform plan
 7. CodeBuild stage for security check using checkov
+8. 
 
 ### Getting started
 
