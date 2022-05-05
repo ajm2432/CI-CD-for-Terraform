@@ -25,8 +25,8 @@ module "security" {
  ################################################################################
  module "s3" {
    source                    = "./modules/S3"
-   log_bucket_name           = "prod-${var.region}-logs"
-   pipeline_bucket_name      = "production-tf-pipeline-artifacts-${var.region}"
+   log_bucket_name           = "logbucket-tf-${var.region}-logs"
+   pipeline_bucket_name      = "tf-pipeline-artifacts-${var.region}"
    kms_key                   = "${module.security.aws_kms_key}"
  } 
  ################################################################################
@@ -35,8 +35,8 @@ module "security" {
 module "pipelines" {
   source                         = "./modules/CodePipelines"
   connection_name                = "prod-example-tf"
-  full_repo_name                 = "ajm2432/TerraformTest"
-  git_hub_url                    = "https://github.com/ajm2432/TerraformTest.git"
+  full_repo_name                 = "ajm2432/TerraformTest"#Change to your user and repository
+  git_hub_url                    = "https://github.com/ajm2432/TerraformTest.git"# Change to Match User and repository
   pipeline_name                  = "prod-example-tf-pipeline" 
   region                         = "${var.region}"
   codebuild-Security-Check-role  = "${module.security.security_check_iam_role}"

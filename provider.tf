@@ -3,6 +3,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 3.27"
+      
     }
   }
 
@@ -10,4 +11,5 @@ terraform {
 }
 provider "aws" {
   profile = "default"
+  region  = var.region
 }

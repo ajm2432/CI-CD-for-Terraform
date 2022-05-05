@@ -28,7 +28,7 @@
 <h3 align="center">CI/CD pipeline for terraform</h3>
 
   <p align="center">
-     A CI/CD pipeline for planing,testing,and deploying terraform.Built using terraform
+     A CI/CD pipeline for validating terraform code,testing against aws and cis best practices,and deploying the code.Built using terraform
     <br />
   </p>
 </div>
@@ -61,38 +61,49 @@
 5. S3 Bucket for pipeline artifacts/Block public access
 6. CodeBuild stage for terraform plan
 7. CodeBuild stage for security check using checkov
-8. 
+8. Manual Approval stage
+9. CodeBuild deploy stage using terraform apply
+10. CodeStar connection to GitHub repo
 
 ### Getting started
 
-Create an S3 bucket in the account the code will be run against to store your statefile.
-Default region is us-west-2, to change , change the region variable in variables.tf to the correct region
-
-IMPORTANT!
-
-make sure to change the full_repo_name,and git_hub_url in the CodePipeline Modules
-
-Note that after the enviroment is built you need to go to CodePipeline ->  Settings -> Connections -> Update Pending Connection in order to run the pipeline with your GitHub repo.
+Create a user in your aws account that has permissions to create the infrastructure resources.
 
 ### Prerequisites
 
 1. You have terraform installed on your local machine
 2. You have an AWS account and user with access to perform the provisioning of infrastructrue
 3. You have  AWSCLI tools installed
-4. you have created a s3 bucket for the terraform state file
+
 
 ### Installation
 
 1. update ./aws/config and ./aws/credentials with the user and access keys needed to acces your aws account
-2. create s3 bucket for statefile
-3. Clone the repo
+   ```sh
+   aws configure
+   ```
+
+   Enter the information for user created in your aws account that will be used to deploy terraform.
+
+   ```sh
+   AWS Access Key ID [****************XXXX]: 
+   AWS Secret Access Key [****************XXXX]: 
+   Default region name [us-east-1]: 
+   Default output format [json]:
+   ```
+2. Clone the repo
    ```sh
    git clone https://gitlab.aws.dev/ausmillr/ci-cd-pipeline-terraform-solution.git
    ```
-4. Add s3 bucket , and region to the backend config backend.tf. if you want the state file in another folder add that path in front of terraform.tfstate ie."path/terraform.tfstate"
+3. set your repository information in main.tf
    ```sh
-   backend "s3", bucket = "my-bucket-name" region ="us-west-2"
-  
+   full_repo_name = "GitHubUsername/RepositoryName"
+   git_hub_url = "https://github.com/Username/RepositoryName.git"
+   ```
+4. set the region variable to your desired region in variables.tf
+   ```sh
+   variable "region", default = "us-west-2'
+   ```
 5. initialize terraform
    ```sh
     terraform init
@@ -102,15 +113,11 @@ Note that after the enviroment is built you need to go to CodePipeline ->  Setti
     terraform apply
    ```
 
+### Important
+
+Note that after the enviroment is built you need to go to CodePipeline ->  Settings -> Connections -> Update Pending Connection in order to run the pipeline with your GitHub repo.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Add Security (KMS/IAM)
-- [x] Add S3
-- [x] Pipeline infrastructure
-    - [x] Apply
 
 See the [open issues](https://gitlab.aws.dev/ausmillr/ci-cd-pipeline-terraform-solution/-/issues) for a full list of proposed features (and known issues).
 
