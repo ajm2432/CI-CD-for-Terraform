@@ -139,9 +139,7 @@ See the [open issues](https://gitlab.aws.dev/ausmillr/ci-cd-pipeline-terraform-s
 <!-- CONTACT -->
 ## Contact
 
-Austin Miller -  ausmillr@amazon.com
-
-Project Link: [https://gitlab.aws.dev/ausmillr/ci-cd-pipeline-terraform-solution.git](https://gitlab.aws.dev/ausmillr/ci-cd-pipeline-terraform-solution.git)
+Austin Miller -  amiller.craig@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
